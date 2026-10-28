@@ -127,5 +127,5 @@
   "buildKind": "native card image of this module alone, every stock effect kept",
   "projectLoadStatus": "missing-project prompts dismissed; no valid project loaded",
   "harness": "scripts/capture-module-ui.py, unmodified; the plan of 0.1.0's captures",
-  "sourceSha256": "6928f64df1c5451a580f60f883dde8a9706b83f060cb80010bd542cb87a6d561"
+  "sourceSha256": "c440da5241d5106e5736bc070a7ad98a26ee5ae5377beef542e7043ba962b708"
 }

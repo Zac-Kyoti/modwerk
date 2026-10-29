@@ -559,7 +559,14 @@ static int guarded(Render *f, unsigned track, unsigned ping, unsigned start, uns
     return r;
 }
 /* The FLEX renderer, in the audio render: no mask. The row is read once, a word at a time; a module that left
- * stays in memory while the render holds it (the paused-task scan). */
+ * stays in memory while the render holds it (the paused-task scan).
+ * A track a machine renders itself (or that renders stock's silent source in its place) keeps stock's FLEX voice
+ * stopped (byte 0 of its record, see hush()), every render. Each trig on it starts that voice from the machine's
+ * bytes read as FLEX settings, and nothing advances it; when the track later renders as FLEX without passing
+ * mw_assign (a bank, pattern or Part change, a project load), stock rendered that voice. On a track that was the
+ * machine since power-on, its first FLEX frame stopped the DSP core for good (owner's MKII, 29 October 2026: Analog BD
+ * on T1 in bank B, FLEX in bank C, cold boot, PLAY, B -> C, every time; #1051). Stopped, the voice reads silence until
+ * the track's next trig as FLEX starts it from FLEX's own settings. */
 int mw_source_render_impl(unsigned track, unsigned ping, unsigned start, unsigned end)
 {
     const Machine *m[ROWS - 5u], *who = 0; unsigned n = 0;
@@ -568,12 +575,15 @@ int mw_source_render_impl(unsigned track, unsigned ping, unsigned start, unsigne
         if (((const Machine *)v)->abi == MODWERK_MACHINE_ABI) m[n++] = (const Machine *)v;
     }
     if (valid_bank() && owner(m, n, current_part(), track, &who)) {
+        if (who->render) U8(VOICE + VOICE_STRIDE * track) = 0; /* POLY8's voices (no render of its own) are stock's */
         if (who->source_kind && charged[track] != who) /* uncharged: stock's silent source, never an unpaid voice */
             return STOCK(Render *, 0x400047f0u)(track, ping, start, end);
         Render *f = who->render ? who->render : STOCK(Render *, 0x40004008u); /* POLY8's voices render inside stock's */
         return who->source_kind ? f(track, ping, start, end) : guarded(f, track, ping, start, end);
-    } else if (valid_bank() && orphan(current_part(), track)) /* its bytes are the absent machine's, not FLEX's */
+    } else if (valid_bank() && orphan(current_part(), track)) { /* its bytes are the absent machine's, not FLEX's */
+        U8(VOICE + VOICE_STRIDE * track) = 0;
         return STOCK(Render *, 0x400047f0u)(track, ping, start, end);
+    }
     else /* unguarded: mostly stock's own FLEX render; FM Synth also plays a legacy FMSYNTH-named sample as FM here (#999) */
         for (unsigned k = 0; k < n; ++k)
             if (m[k]->flags & MODWERK_MACHINE_RENDER_FLEX && m[k]->render) return m[k]->render(track, ping, start, end);

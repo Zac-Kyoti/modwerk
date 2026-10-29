@@ -394,6 +394,36 @@ int main(void)
         rows(0, 0, 0, 0);
     }
 
+    /* A track a machine renders keeps stock's FLEX voice stopped, every render: its trigs start that voice from the
+     * machine's bytes, and a bank or Part change that makes the track FLEX again never passes mw_assign (#1051).
+     * A FLEX track's voice, and the voice of a machine without its own render (VECTOR, POLY8), are stock's. */
+    {
+        const void *a_v[] = {&A, &V};
+        rows(a_v, 2, 0, 0);
+        uint8_t *t3 = stock_voices + 168u * 3u, *t2 = stock_voices + 168u * 2u, *t4 = stock_voices + 168u * 4u;
+        CHECK(mw_assign(part0(), 2, 1) == 1 && mw_assign(part0(), 3, 5) == 1 && mw_assign(part0(), 4, 6) == 1);
+        *t3 = 1; *t2 = 1; *t4 = 1; t3[1] = 7;
+        int a_before = a_renders;
+        CHECK(mw_source_render_impl(3, 0, 0, 1) == a_renders && a_renders == a_before + 1);
+        CHECK(*t3 == 0 && t3[1] == 7 && *t2 == 1);                           /* A's track: stopped, the rest kept */
+        *t3 = 1; CHECK(mw_source_render_impl(3, 0, 0, 16) > 0 && *t3 == 0);  /* a trig between the two renders */
+        int flex = stock_renders;
+        CHECK(mw_source_render_impl(2, 0, 0, 1) == -7 && stock_renders == flex + 1 && *t2 == 1); /* FLEX: stock's */
+        CHECK(mw_source_render_impl(4, 0, 0, 1) == -7 && *t4 == 1);          /* VECTOR renders inside stock's voice */
+        /* The Part changes under the track (no mw_assign): FLEX again, its voice left as the machine's renders left it. */
+        part0()[60 + 90] = 0; part0()[61 + 90] = 0; part0()[62 + 90] = 0;
+        CHECK(mw_source_render_impl(3, 0, 0, 1) == -7 && *t3 == 0);
+        *t3 = 1; CHECK(mw_source_render_impl(3, 0, 0, 1) == -7 && *t3 == 1); /* its first FLEX trig plays */
+        /* An absent machine's track renders stock's silent source and keeps the voice stopped, too. */
+        rows(0, 0, 0, 0);
+        part0()[60 + 90] = 'A'; part0()[61 + 90] = 'B'; part0()[62 + 90] = 1;
+        int silent = silent_renders;
+        CHECK(mw_source_render_impl(3, 0, 0, 1) == -9 && silent_renders == silent + 1 && *t3 == 0);
+        part0()[60 + 90] = 0; part0()[61 + 90] = 0; part0()[62 + 90] = 0;
+        part0()[60 + 120] = 0; part0()[61 + 120] = 0; part0()[62 + 120] = 0;
+        memset(stock_voices, 0, sizeof stock_voices);
+    }
+
     /* The frame guard (a frame 47,891 counts; each earns 38,312, short ones save up to 23,945; the slack 4,789). F's
      * render on track 3 runs while the frame it predicts from the last frame's times stays within the budget, and
      * renders stock's silent source while it would overdraw. */

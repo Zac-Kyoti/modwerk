@@ -1,0 +1,1 @@
+Octatrack base (beta): on a track running FM Synth, Analog BD or another machine module, LFO SETUP's PMTR list now names that machine's own parameters (on FM Synth PTCH RATO INDX FINE FDBK DEC) instead of FLEX's (PTCH STRT LEN RATE RTRG RTIM). Stock machines and FX destinations are unchanged. Checked by the base build and its tests; not yet tried in the emulator or on a unit.

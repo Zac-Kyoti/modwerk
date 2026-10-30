@@ -39,7 +39,6 @@ UPDATED
 
 ON THE OCTATRACK BETA
 
-- Base updates are safe now. A power cut or USB dropout during a base update no longer leaves the Octatrack unable to start.
 - Up to 128 modules can be installed at once, up from 20.
 - Syncs keep at once. A synced module set is kept as soon as it’s sent, without waiting for a self-test.
 - A crash at power-on stays a one-off. If the Octatrack freezes while it loads your modules, the next start leaves that module out and loads the rest.

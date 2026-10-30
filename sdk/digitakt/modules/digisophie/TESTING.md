@@ -16,6 +16,14 @@ The author documents their own checks in [upstream/README.md](upstream/README.md
 
 The author’s `digisophie-1.1.13.elemod` release object (SHA-256 `6eadc29d581b24ff84fe3fe32399b998a91375ee06182631ab499109b4a003a5`) contains 7,998 B in `.run`, 720 B in `.bss` and 4 B of table contributions: **8,722 B** in total. This counts code, initialized data, zero-filled state and contributions, not the JSON file size. It excludes the shared Modwerk core and linker alignment; the browser estimate reserves those separately. This is an upstream object measurement, not a measured Modwerk build or hardware load report.
 
+## OS 1.54 — 30 October 2026
+
+Version `1.1.13-experimental.3` adds Digitakt OS 1.54 (#806). Source revision: `ce17b9e4868027bafe8684054b45f28ea368bd7c`, the author's merge of irpina's OS 1.54 port. `glue.s` and `digitakt.c` now take every OS address from `os153.inc`/`os153.h` or `os154.inc`/`os154.h`; `sophie.c` and the other sources are unchanged. `build.json`'s 1.54 release carries the author's seventeen 1.54 sites from `mod.json`'s `ports`, each turned into an address, length and SHA-256 guard as for 1.53 (the 1.53 sites still match the author's `mod.json`).
+
+Modwerk serves the author's own packages: `digisophie-1.1.13.elemod` for 1.53 (elekloader's pin, unchanged) and `release/digisophie-1.1.13-os1.54.elemod` from that commit for 1.54 (SHA-256 `51cd3aca3652e1926b6be0213269ac0b54b3c44655f06af4a79270db371b58fa`), pinned in `sdk/imports/elekloader-digisophie-2026-10-30.json`. The 1.54 object holds 7,974 B in `.run`, 720 B in `.bss` and 4 B of contributions (8,698 B); the declared 8,722 B (1.53) stays the larger figure. The 1.54 object records a `digitakt.c` SHA-256 (`93052df4…`) other than the committed file's (`69ab5551…`); `glue.s` and `sophie.c` match. Modwerk did not rebuild it from source.
+
+Not tested: the 1.54 build on a unit, in the emulator, or for audio, timing, persistence or stress.
+
 ## Documentation capture — 7 October 2026
 
 Documentation version: `1.1.13-experimental.2`. Source revision: `961c39cec699e8f8940391634aaba9fad7120792` (`.`). Native source, build declaration and pinned release objects were not changed.

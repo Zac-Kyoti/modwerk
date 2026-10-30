@@ -269,7 +269,8 @@ unsigned mw_chooser_type(unsigned type, const Part *ptr)
 /* Stock's per-track voice records (0x800049d8 + 168 * track): byte 0 is "playing", which the trig start (0x4000f450)
  * sets and the sample fetch (0x40007960) reads silence while it is 0. A module machine is FLEX underneath, so each of
  * its trigs also starts stock's FLEX voice from the machine's bytes read as FLEX settings, and its own render never
- * advances that voice. Nothing stops it when the track changes machine: stock's parameter load (0x40001f18) never
+ * advances that voice. Stock doesn't stop it when the track changes machine (machines with a render of their own are
+ * stopped at every render, mw_source_render_impl): stock's parameter load (0x40001f18) never
  * touches the record, and voice bind (0x40006820) runs only where a commit changes the type. A switch that keeps the
  * stored type (FLEX <-> machine, of the playing Part) stops it here, before the track's parameters change: the track
  * is silent until its next trig, never a short burst of the old voice that the first trig cuts or plays over.
@@ -598,16 +599,17 @@ static int guarded(Render *f, unsigned track, unsigned ping, unsigned start, uns
  * When the track renders as FLEX again without passing mw_assign (a bank, pattern or Part change, a project load),
  * stock rendered them. On a track that was the machine since power-on the retrig interval was never computed (0), so
  * the first FLEX segment restarted the voice on every sample: more sections than the record's header can name, which
- * stock's DSP source misread and overran X memory with, and DSP core 1 jumped to P:0 for good (owner's MKII and
+ * stock's DSP source misread and overran X memory with, and DSP core 1 jumped to P:0 for good (an MKII and
  * ot_emu, 29 October 2026: Analog BD on T1 in bank B, FLEX in bank C, cold boot, PLAY, B -> C; #1051). FM Synth's own
- * render already clears the RTRG count; this does it for every machine with a render of its own. Stopped, the track
- * stays silent until its next trig as FLEX, which starts both from FLEX's own settings. */
+ * render already clears the RTRG count; this does it for every machine with a render of its own. Stopped, nothing
+ * overruns: stock's render restarts the voice at most once, and the next trig as FLEX starts both from FLEX's own
+ * settings. */
 #define RENDER_STATE 0x80004898u
 #define RENDER_STATE_STRIDE 40u
 static void stop_stock(unsigned track)
 {
     U8(VOICE + VOICE_STRIDE * track) = 0;
-    *(volatile uint32_t *)AT(RENDER_STATE + RENDER_STATE_STRIDE * track + 4u) = 0; /* the RTRG count: no retrig */
+    *(volatile uint32_t *)AT(RENDER_STATE + RENDER_STATE_STRIDE * track + 4u) = 0; /* the RTRG count: no run of retrigs */
 }
 int mw_source_render_impl(unsigned track, unsigned ping, unsigned start, unsigned end)
 {

@@ -5,8 +5,6 @@ here’s what happened on Modwerk this week. Nine new modules landed, including 
 
 NEW MODULES
 
-- Beat Slicer (https://modwerk.app/#module/beat-slicer/) Octatrack · by twwwy
-  Record freely, set the original BPM and cut the sample into beat-spaced slices. Needs the USB base from the beta.
 - STRING (https://modwerk.app/digitakt/module/digistring/) Digitakt · by Alez22
   A plucked-string machine: bowed, hit, noise or plucked strings through the Digitakt’s own filter and effects.
 - Deja Vu (https://modwerk.app/#module/dejavu/) Octatrack · by Jan Kolkmeier
@@ -23,6 +21,8 @@ NEW MODULES
   MIDI tracks send their pattern’s CC values right away after a pattern change, project load or STOP.
 - Filter Hz (https://modwerk.app/#analog-rytm-mkii/module/filter-hz) Analog Rytm · by Iced-Cream
   The filter’s FRQ popup shows the cutoff in hertz instead of 0–127.
+- Beat Slicer (https://modwerk.app/#module/beat-slicer/) Octatrack · by twwwy
+  Record freely, set the original BPM and cut the sample into beat-spaced slices. Needs the USB base from the beta.
 
 UPDATED
 

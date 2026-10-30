@@ -22,7 +22,15 @@ Version `1.1.13-experimental.3` adds Digitakt OS 1.54 (#806). Source revision: `
 
 Modwerk serves the author's own packages: `digisophie-1.1.13.elemod` for 1.53 (elekloader's pin, unchanged) and `release/digisophie-1.1.13-os1.54.elemod` from that commit for 1.54 (SHA-256 `51cd3aca3652e1926b6be0213269ac0b54b3c44655f06af4a79270db371b58fa`), pinned in `sdk/imports/elekloader-digisophie-2026-10-30.json`. The 1.54 object holds 7,974 B in `.run`, 720 B in `.bss` and 4 B of contributions (8,698 B); the declared 8,722 B (1.53) stays the larger figure. The 1.54 object records a `digitakt.c` SHA-256 (`93052df4…`) other than the committed file's (`69ab5551…`); `glue.s` and `sophie.c` match. Modwerk did not rebuild it from source.
 
-Not tested: the 1.54 build on a unit, in the emulator, or for audio, timing, persistence or stress.
+Not tested: the 1.54 build on a unit, or for audio, timing, persistence or stress.
+
+## Documentation capture — 30 October 2026
+
+Documentation version: `1.1.13-experimental.3`, on OS 1.54. The unchanged vendored elekloader kit 0.7.0 (`patch.build`, the engine the site's builder runs) linked core 2.1 and the author's `digisophie-1.1.13-os1.54.elemod` with the owner's private stock OS 1.54 file: no overlaps, stock bytes as expected, output verified. Built-image SHA-256: `7c71c84a8937f639090b0849b72d7972d89eb28c2be9f97acecfd91600fdd1d4`. Firmware and derived images remain private.
+
+Pinned digiemu `c1b5735835923e328f8b4950d6ba927875e5b669` with its six patched-Unicorn 2.1.4 fixes (`emu.unicorn_compat`: compatible) and Python 3.12.13 booted it to the live UI and ran [capture-plan.txt](media/capture-plan.txt) with firmware-native drawing (`hle=False`), a disposable first-boot project and no network (`sandbox-exec`, network denied). Every frame was opened for review: SOPHIE in the machine chooser, its SRC page with TUNE, MODEL, FOLD, SAMP, SWEEP, METAL, FBK and COLOR, MODEL stepping through FUSE, BOOM, PIPE and SHARD, and the stock AMP page. The chooser, FUSE and AMP frames are pixel-identical to the 1.53 captures below. [capture.json](media/capture.json) keeps the inputs, timestamps, PNG hashes and identities; the 1.53 record it replaces is in this file's history.
+
+UI-only documentation; no hardware, audio, timing, persistence or stress qualification.
 
 ## Documentation capture — 7 October 2026
 

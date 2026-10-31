@@ -17,6 +17,7 @@ The beta base moves with it (owner review): `dsp-sites.json` gives feature 1 thr
 - **This image (emulator):** COMPRESSOR on every track's FX1: the tap writes Y $7E00-$7EFF on core 1 (T1-T4) and Y $7F00-$7FFF on core 0 (T5-T8), nothing at Y $800-$9FF.
 - **Resident engine:** `test_resident_engines` (the base's engine in the DSP simulator) gives the cross-core key exactly two blocks late for every enable order and core skew, and a same-core key 0 or 1 block, as 0.2.0.
 - **Free-slot rule:** a buffer of 15,870 words ($3DFE, Mini Verb and E-Verb) or BBD's 8,250 (0x203A) fits in the first internal FX2 slot beside the bus; 16,384 does not (`test_stock_hook_resources`, `test_resident_stock_dsp`).
+- **Composition suites** (`export-composition-proofs.py --suite sidechain / sidechain-visible / analog-bd`, static stock): 169 of 512, 618 of 1,024 and 146 of 212 selections build, exactly the selections that build with 0.2.0 on the same main; only selections containing this module changed.
 - **Load, static bound, memory:** unchanged from 0.2.0 (the same instructions; 528 private Y words a core, now 512 + 16).
 - **Hardware:** below and in [evidence/hardware.md](evidence/hardware.md): the module alone and beside BBD Delay on the author's MKI, 30 October 2026.
 

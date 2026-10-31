@@ -221,7 +221,7 @@
   },
   "tests": {
     "report": "TESTING.md",
-    "summary": "0.2.1 moves the key bus to Y $7e00..$7fff and the MON words to Y $ff0..$fff; the DSP code is 0.2.0's, so 0.2.0's load, static ColdFire bound and memory inventory carry over (the image differs from 0.2.0's in the 12 address bytes only). Native octabam builds 0.2.0 alone and in 965 of the suites' selections; the beta base's resident engine passes the resident-engine checks at the new addresses (the key two blocks late whatever the enable order). On his MKI (30 October 2026) the author flashed the native image of this version alone and beside BBD Delay and reported both working.",
+    "summary": "0.2.1 moves the key bus to Y $7e00..$7fff and the MON words to Y $ff0..$fff; the DSP code is 0.2.0's, so 0.2.0's load, static ColdFire bound and memory inventory carry over (the image differs from 0.2.0's in the 12 address bytes only). Native octabam builds 0.2.1 alone and in 933 of the suites' selections (618 of 1,024 visible, 169 of 512 historical, 146 of 212 with Analog BD: the same selections build as with 0.2.0 on the same main); the beta base's resident engine passes the resident-engine checks at the new addresses (the key two blocks late whatever the enable order). On his MKI (30 October 2026) the author flashed the native image of this version alone and beside BBD Delay and reported both working.",
     "hardwareStatus": "reported",
     "evidenceRevision": "8868867d02b15b5368a7e54772aff0c1c0387c81",
     "gates": [

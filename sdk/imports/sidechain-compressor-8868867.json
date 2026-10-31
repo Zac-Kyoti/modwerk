@@ -159,6 +159,6 @@
   "status": "Owner review requested: the module changes the beta base's resident engine and controller (resident_dsp.py, stock_hook_controllers.py, dsp-sites.json, machine_registry.c).",
   "authorPin": {
     "repository": "https://github.com/Zac-Kyoti/octatrack-kyoti-fw",
-    "revision": "b0d49bf32d3fcc2e3ce7e9cec67f4fbb2619e511"
+    "revision": "8868867d02b15b5368a7e54772aff0c1c0387c81"
   }
 }

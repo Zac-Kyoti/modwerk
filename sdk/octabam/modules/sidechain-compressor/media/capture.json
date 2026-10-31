@@ -112,8 +112,8 @@
   },
   "composedImage": {
     "what": "The complete image the site composes for the same selection, with its appended runtime and the core logger. The same plan drew the same three frames.",
-    "sha256": "3cf5b3734d9e9148bad0c7a835cd7ac624bbdb1d9474eb3a0ba80d9ccb71846e",
-    "bytes": 1117520,
+    "sha256": "9b8c9ed37f290d050ba39ec09144362548df216b772af212594f0bc3c2f48c61",
+    "bytes": 1118124,
     "screenshots": {
       "ot-compressor-selection.png": "505432eb93b2efa56306b6c9582b83dd2d01c104e6a4d21580972b55a26493c7",
       "ot-compressor-main.png": "147a64589097cf12a0d7765dbe5adc266640a4e0a97c164353e3e146bcd765e5",

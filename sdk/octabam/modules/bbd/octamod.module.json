@@ -3,7 +3,7 @@
   "id": "bbd",
   "key": "BBD",
   "name": "BBD Delay",
-  "version": "0.1.1-experimental",
+  "version": "0.1.2-experimental",
   "category": "effects",
   "author": {
     "github": "JamCones",
@@ -251,11 +251,11 @@
             "scope": "instance"
           },
           {
-            "name": "Reserved stock FX2 Y buffer: ring up to 4,095 words, 58 coefficient words",
+            "name": "Stock FX2 Y buffer it uses: ring up to 4,095 words at +$0, 58 coefficient words up to +$2039",
             "space": "dsp-y",
-            "words": 16384,
+            "words": 8250,
             "wordBits": 24,
-            "bytes": 49152,
+            "bytes": 24750,
             "scope": "instance"
           },
           {
@@ -291,11 +291,11 @@
             "scope": "shared"
           }
         ],
-        "perInstanceBytes": 49920,
+        "perInstanceBytes": 25518,
         "sharedBytes": 7246,
         "maxInstances": 8,
-        "totalBytes": 406606,
-        "conditions": "The stock 256-word X block and 16,384-word Y buffer per FX2 instance, including unused padding; code shared once per core. No authored heap or SDRAM arena; the stop kill's ColdFire code is a straight-line hook or event handler with no stack of its own. The system stack is bounded by the rotation's do, a bsr and its divide's do on each core. Logical 24-bit DSP words; flash descriptors use byte accounting. Guarded eight-instance software evidence does not claim hardware canaries.",
+        "totalBytes": 211390,
+        "conditions": "The stock 256-word X block per FX2 instance, including unused padding, and the 8,250 words of the stock 16,384-word FX2 Y buffer it uses (+$0..+$2039, since 0.1.2); code shared once per core. No authored heap or SDRAM arena; the stop kill's ColdFire code is a straight-line hook or event handler with no stack of its own. The system stack is bounded by the rotation's do, a bsr and its divide's do on each core. Logical 24-bit DSP words; flash descriptors use byte accounting. Guarded eight-instance software evidence does not claim hardware canaries.",
         "report": "evidence/release-bounds.md"
       },
       "hardware": {

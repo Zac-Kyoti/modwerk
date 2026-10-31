@@ -178,7 +178,7 @@
     ]
   },
   "resources": {
-    "recorded": "2026-10-24 (0.2.0, same DSP code in 0.2.1); emulator load measurement, static ColdFire bound and exact memory inventory",
+    "recorded": "2026-10-24 (0.2.1 runs the same code): emulator load, static ColdFire bound, exact memory",
     "storage": {
       "label": "Declared DSP reservation",
       "display": "26,288 logical bytes / 16 instances",

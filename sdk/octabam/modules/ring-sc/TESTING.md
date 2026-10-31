@@ -5,6 +5,7 @@
 The base's key bus moves from Y $800-$9FF to Y $7E00-$7FFF on each core (the tail of the first internal FX2 slot), with Sidechain Compressor 0.2.1, so Y $7F0-$9FF is free for a DSP machine's voice ([#1064](https://github.com/repeat98/modwerk/issues/1064); the author agreed to the move there). RINGMOD SC changes one constant: the same-core read is `add #>$7e00,a` (was `#>$800`, `ringsc.asm` line 187; the header comment follows), the same two-word instruction, and the package's two same-core read claims become `y:0:r:0x7e00:0x200` and `y:1:r:0x7e00:0x200`. The cross-core reads (the shared window) are unchanged.
 
 - Checked: the base's claim rule admits the new reads only inside the bus (`test_stock_hook_resources`, `test_stock_hook_binding`); the resident tap writes the bus at the new address (`test_resident_engines`, and the emulator on a card image with Sidechain Compressor: Y $7E00-$7FFF written, Y $800-$9FF not).
+- Screens: `scripts/capture-module-ui.py` with `ot_emu` `21b159be…` and 0.2.0's plan on Modwerk's native card image of this version alone (MAIN OS `b9d02d3a…`, stock effects kept). Three are byte-identical to 0.2.0's; the two SETUP screens now show the stock FX1 effects above RINGMOD SC in the chooser (0.2.0's private remix listed NONE and RINGMOD SC only).
 - **Hardware: not run on a unit.** The module reads the bus only over USB on the beta base; the owner's MKII run of the regenerated base is to follow in review.
 
 ## 0.2.0-experimental: RING's SLEW, S&H and RECT (21 October 2026)

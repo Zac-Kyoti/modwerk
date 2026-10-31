@@ -76,7 +76,7 @@ Original code, tests and documentation by Nathaniel Pavel (@npp1993), MIT ([LICE
 
 ## Screens and audio
 
-Unedited MKII framebuffer captures from the headless emulator, taken on a private card image of this version (a card image has no key bus, so they show the pages, not the effect). [Capture provenance](media/capture.json) has the panel plan and the image and emulator hashes; [media rights](media/LICENSE.md) reserves the underlying Elektron rights. They show the pages, not audio; no audio is included.
+Unedited MKII framebuffer captures from the headless emulator, taken on Modwerk's native card image of this version alone with the stock effects kept (a card image has no key bus, so they show the pages, not the effect). [Capture provenance](media/capture.json) has the panel plan and the image and emulator hashes; [media rights](media/LICENSE.md) reserves the underlying Elektron rights. They show the pages, not audio; no audio is included.
 
 ![FX1 SETUP with RINGMOD SC chosen and MODE on DUCK](media/ot-setup-chooser.png)
 

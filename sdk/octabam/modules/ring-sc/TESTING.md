@@ -6,6 +6,7 @@ The base's key bus moves from Y $800-$9FF to Y $7E00-$7FFF on each core (the tai
 
 - Checked: the base's claim rule admits the new reads only inside the bus (`test_stock_hook_resources`, `test_stock_hook_binding`); the resident tap writes the bus at the new address (`test_resident_engines`, and the emulator on a card image with Sidechain Compressor: Y $7E00-$7FFF written, Y $800-$9FF not).
 - Screens: `scripts/capture-module-ui.py` with `ot_emu` `21b159be…` and 0.2.0's plan on Modwerk's native card image of this version alone (MAIN OS `b9d02d3a…`, stock effects kept). Three are byte-identical to 0.2.0's; the two SETUP screens now show the stock FX1 effects above RINGMOD SC in the chooser (0.2.0's private remix listed NONE and RINGMOD SC only).
+- Performance: `evidence/performance.json` carries 0.2.0's figures to this version (the changed instruction keeps its form and length, so the loop's instructions and cycles are the same). `module:verify`: 60 native module-owned images match, 102 matching refusals, 0 mismatches, of 162 selections.
 - **Hardware: not run on a unit.** The module reads the bus only over USB on the beta base; the owner's MKII run of the regenerated base is to follow in review.
 
 ## 0.2.0-experimental: RING's SLEW, S&H and RECT (21 October 2026)

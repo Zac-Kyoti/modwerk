@@ -13,7 +13,8 @@ repository.
 Why now: the base's key bus moves to Y $7E00-$7FFF, the tail of the first internal FX2 slot, with Sidechain Compressor 0.2.1. With the full-slot claim, BBD would be refused on T1 and T5 FX2 while Sidechain Compressor or Sidechain Ringmod is installed; with 8,250 words it stays clear of the bus by more than 7,600 words.
 
 - **Hardware (card):** the author of Sidechain Compressor flashed Modwerk's native image of BBD Delay with Sidechain Compressor 0.2.1 (MAIN OS `c234d13ce64efdf96a8843065feaf1c400f4d9ada081a680d557d639d112019f`, `MW_BBDSC`) on his MKI, 30 October 2026: BBD on T1, T5 and T3 FX2 beside a keyed compressor, at maximum TIME, STGS 4096 and FRZ, clean, and the compressor still ducks ([evidence/sidechain-pair-hardware.md](evidence/sidechain-pair-hardware.md)).
-- **USB:** the package changes only in its buffer claim; not run on a unit in this version.
+- **Card builds with Sidechain Compressor:** the full-slot claim met Sidechain Compressor's cross-core key window (the last 514 words of the T3/T7 slots), so `modules:pairs` refused the pair; with 8,250 words it builds (`compatibility-pairs.json`: the bbd+sidechain-compressor entries are gone in all three contexts).
+- **USB:** the package changes only in its buffer claim (`buffer` 8,250; package `58b77069…`); not run on a unit in this version.
 
 ## Commands and exact revision
 
